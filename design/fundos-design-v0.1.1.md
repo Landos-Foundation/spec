@@ -250,14 +250,15 @@ Powerful interests will resist this system. The defense against them is not lega
 
 10. Inspiration and Prior Art
 Fundos stands on the shoulders of existing work — the same way Bitcoin assembled HashCash, b-money, Merkle trees, and digital signatures into something new.
-Component                       Existing Work Used
-Cryptographic security          SHA-256, ECDSA, Merkle trees
-Land identification             WGS84, GeoJSON (RFC 7946), H3, Coords protocol
-Bitcoin anchoring               OpenTimestamps (Peter Todd)
-Self-sovereign identity         W3C DIDs
-Community land documentation    Open Tenure (FAO)
-Proof of location               FOAM protocol, IEEE Proof of Location research
-Consensus foundation            Proof of Stake (Ethereum)
+| Component | Existing Work Used |
+|---|---|
+| Cryptographic security | SHA-256, ECDSA, Merkle trees |
+| Land identification | WGS84, GeoJSON (RFC 7946), H3, Coords protocol |
+| Bitcoin anchoring | OpenTimestamps (Peter Todd) |
+| Self-sovereign identity | W3C DIDs |
+| Community land documentation | Open Tenure (FAO) |
+| Proof of location | FOAM protocol, IEEE Proof of Location research |
+| Consensus foundation | Proof of Stake (Ethereum) |
 
 12. What Fundos Is Not
 
@@ -289,7 +290,7 @@ Coords reference implementation: github.com/coordsapp/core
 End of v0.1.1 — this is a thinking document, not a final design. All sections subject to change.
 
 Changelog
-Version       Date          Changes
-v0.1.0        2026-05-17    Initial draft
-
-v0.1.1        2026-05-18    Token model expanded to 3D (X, Y, Z); two-tier supply model introduced; Z-axis programmatic issuance defined
+| Version | Date | Changes |
+|---|---|---|
+| v0.1.0 | 2026-05-17 | Initial draft |
+| v0.1.1 | 2026-05-18 | Token model expanded to 3D (X, Y, Z); two-tier supply model introduced; Z-axis programmatic issuance defined |
