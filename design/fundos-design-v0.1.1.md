@@ -250,6 +250,7 @@ Powerful interests will resist this system. The defense against them is not lega
 
 10. Inspiration and Prior Art
 Fundos stands on the shoulders of existing work — the same way Bitcoin assembled HashCash, b-money, Merkle trees, and digital signatures into something new.
+
 | Component | Existing Work Used |
 |---|---|
 | Cryptographic security | SHA-256, ECDSA, Merkle trees |
