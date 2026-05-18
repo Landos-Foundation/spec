@@ -246,4 +246,50 @@ Fundos is designed to have no off switch.
 - **Bitcoin anchored** — records survive even if Fundos is attacked
 - **Geographic distribution** — shutting Fundos down would require simultaneous action across dozens of countries
 
-Powerful interests will
+Powerful interests will resist this system. The defense against them is not legal — it is structural. There is nothing to shut down.
+
+10. Inspiration and Prior Art
+Fundos stands on the shoulders of existing work — the same way Bitcoin assembled HashCash, b-money, Merkle trees, and digital signatures into something new.
+Component                       Existing Work Used
+Cryptographic security          SHA-256, ECDSA, Merkle trees
+Land identification             WGS84, GeoJSON (RFC 7946), H3, Coords protocol
+Bitcoin anchoring               OpenTimestamps (Peter Todd)
+Self-sovereign identity         W3C DIDs
+Community land documentation    Open Tenure (FAO)
+Proof of location               FOAM protocol, IEEE Proof of Location research
+Consensus foundation            Proof of Stake (Ethereum)
+
+12. What Fundos Is Not
+
+Not a government project — it does not seek or require institutional recognition
+Not a company — it is ownerless infrastructure
+Not connected to other crypto projects — except Bitcoin as a trust anchor
+Not replacing existing land systems — it runs alongside them as a parallel, incorruptible record
+Not finished — this is a v0.1.0 thinking document
+
+
+12. Open Questions
+
+Final name — Fundos is a working name. Token name TBD.
+Token supply constants — exact protocol constants for max altitude (+1,000m) and max depth (-500m) need final validation; Z-axis unit volume definition TBD
+Consensus mechanism — Proof of Land with Proof of Habitation is a working concept; full design TBD
+Genesis block — what goes in it and what does it declare?
+Anti-gaming for Proof of Habitation — GPS spoofing, phone-at-location without presence, etc.
+Governance — how are protocol changes decided once the creator steps away?
+The whitepaper — not yet written; will follow when the design is more settled
+
+
+13. Related Documents
+
+xref-design-v0.1.0.md — XREF spatial cross-reference system design
+Coords protocol spec: github.com/coordsapp/spec
+Coords reference implementation: github.com/coordsapp/core
+
+
+End of v0.1.1 — this is a thinking document, not a final design. All sections subject to change.
+
+Changelog
+Version       Date          Changes
+v0.1.0        2026-05-17    Initial draft
+
+v0.1.1        2026-05-18    Token model expanded to 3D (X, Y, Z); two-tier supply model introduced; Z-axis programmatic issuance defined
