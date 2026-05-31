@@ -80,11 +80,11 @@ This matters philosophically: no one is granting you anything. You are coming to
 
 ### 4.3 Not a Replacement — A Parallel Truth
 
-Landos does not need governments to recognize it on day one to function. It runs alongside existing systems, offering an independent record that cannot be corrupted.
+Landos does not need governments to recognize it on day one. It runs alongside existing systems, offering an independent record that cannot be corrupted.
 
-This is not an anarchist project. Landos is designed to cooperate with governments, not fight them. The goal is to build something so correct, so useful, and so well-designed that governments — especially those with broken or nonexistent land registries — choose to adopt it. Legal standing is not demanded upfront; it is earned through adoption, the same way Bitcoin earned legitimacy. The countries that need Landos most are the ones whose existing registries have already failed their people. Those governments have every reason to embrace a system that solves their problem.
+This is not an anarchist project — but it is not a cooperative one either. Landos does not seek government partnerships or wait for institutional approval. It simply exists. Like Bitcoin, which never asked central banks for permission and now has nation-states holding it as a reserve asset, Landos is designed to earn legitimacy from the ground up — through adoption, through trust, through the undeniable fact of a record that works.
 
-Over time, as trust grows, the Landos record will become more trusted than government registries in contexts where those registries are unreliable or corrupt. In contexts where registries work well, Landos runs alongside them as a parallel, incorruptible record.
+Governments do not need to embrace Landos for it to function. But as more people register land on the chain, as more communities rely on it, and as the record proves itself more reliable than the alternatives, governments will find themselves relating to Landos on its terms — not the other way around. The countries that need it most are the ones whose existing registries have already failed. They have every reason to adopt a system that solves their problem. The door is open. Landos does not knock.
 
 ### 4.4 Land Belongs to Communities
 
@@ -489,7 +489,7 @@ Landos stands on the shoulders of existing work — the same way Bitcoin assembl
 - Token model: two instruments (Land Record NFT + LOS fungible token) — decided ✓
 - Philosophical foundation: Bitcoin + de Soto as the two pillars — decided ✓
 - Node model: tiered (full, light/SPV, geographic) earning LOS for uptime + validation — direction set ✓
-- Government relationship: cooperative, not adversarial; legal standing earned through adoption — decided ✓
+- Government relationship: legitimacy earned through adoption, not permission — decided ✓
 
 **Active open questions:**
 
