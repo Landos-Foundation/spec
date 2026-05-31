@@ -181,9 +181,10 @@ The strength of Bitcoin is not just its cryptography. It is the tens of thousand
 Landos requires the same foundation. Nodes are not an implementation detail — they are the security model.
 
 ### 6.2 Node Types
-Landos uses two node types, modeled directly on Bitcoin's architecture:
 
-Full Nodes
+Landos uses three node types:
+
+## Full Nodes
 
 Store the complete Landos blockchain
 Independently validate every transaction and enforce every protocol rule
@@ -192,7 +193,7 @@ Highest hardware requirements
 Earn the highest LOS rewards
 The backbone of the network's security
 
-Light Nodes (SPV)
+## Light Nodes (SPV)
 
 Store block headers only
 Verify specific transactions against Merkle proofs provided by full nodes
@@ -201,7 +202,16 @@ Can run on standard consumer hardware (laptop, Raspberry Pi)
 Earn smaller LOS rewards than full nodes
 Lower barrier to entry — critical for global distribution
 
+## Relay Nodes
+
+Store some or all of the chain and serve data on request
+Do not validate — they are pipes, not authorities
+A full node or SPV node receiving data from a relay node verifies it independently; the relay node cannot lie in a way that survives verification
+Earn modest LOS rewards for bandwidth and data availability
+Earn nothing for validation, because they perform none
+
 There are no geographic or regional node types. A node that holds only a subset of the chain cannot independently verify the full record — it must trust someone else's view of the data it doesn't have. That trust is an attack surface. In regions where corruption is most likely, local control of a regional node is exactly the threat Landos is designed to eliminate.
+
 
 ### 6.3 How Nodes Earn LOS
 Node operators earn LOS through two mechanisms:
