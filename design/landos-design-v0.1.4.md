@@ -494,7 +494,7 @@ Landos stands on the shoulders of existing work — the same way Bitcoin assembl
 **Resolved since v0.1.3:**
 - Token model: two instruments (Land Record NFT + LOS fungible token) — decided ✓
 - Philosophical foundation: Bitcoin + de Soto as the two pillars — decided ✓
-- Node model: tiered (full, light/SPV, geographic) earning LOS for uptime + validation — direction set ✓
+- Node model: three types — full nodes (validate everything), light/SPV nodes (verify via Merkle proofs), relay nodes (serve data, no validation authority); no geographic nodes — decided ✓
 - Government relationship: legitimacy earned through adoption, not permission — decided ✓
 
 **Active open questions:**
