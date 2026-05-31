@@ -177,55 +177,51 @@ Registering land on Landos requires a small fee paid in LOS. This fee:
 ## 6. Node Economics
 
 ### 6.1 Nodes Are the Network
-
-The strength of Bitcoin is not just its cryptography. It is the tens of thousands of independently operated nodes distributed around the world, each one enforcing the rules and maintaining the record. No single actor can shut down what has no center.
-
+The strength of Bitcoin is not just its cryptography. It is the tens of thousands of independently operated nodes distributed around the world, each one enforcing the rules and maintaining the complete record. No single actor can shut down what has no center. No regional actor can corrupt what every node in the world can verify.
 Landos requires the same foundation. Nodes are not an implementation detail — they are the security model.
 
-### 6.2 Tiered Node Model
+### 6.2 Node Types
+Landos uses two node types, modeled directly on Bitcoin's architecture:
 
-Landos uses a tiered node architecture designed to maximize participation by making it accessible at multiple levels of hardware and commitment:
+Full Nodes
 
-**Full Nodes**
-- Store the complete Landos blockchain
-- Validate all transactions and enforce all protocol rules
-- Highest hardware requirements
-- Earn the highest LOS rewards
+Store the complete Landos blockchain
+Independently validate every transaction and enforce every protocol rule
+No node is trusted — every node verifies everything itself
+Highest hardware requirements
+Earn the highest LOS rewards
+The backbone of the network's security
 
-**Light Nodes (SPV)**
-- Store block headers and hashed indexes only
-- Verify transactions without storing the full chain
-- Can run on standard consumer hardware (laptop, Raspberry Pi)
-- Earn smaller LOS rewards than full nodes
-- Lower barrier to entry — critical for global distribution
+Light Nodes (SPV)
 
-**Geographic Nodes**
-- A node type unique to Landos, made possible by the geographic nature of land records
-- Store full data only for a specific geographic region (e.g., a country, a region, a Community Hub area)
-- Serve as authoritative local nodes for their region
-- Earn LOS rewards for serving their region reliably
-- Enables participation by people with limited storage who still want to contribute meaningfully to their local area
+Store block headers only
+Verify specific transactions against Merkle proofs provided by full nodes
+Trust the chain's proof-of-work, not any individual node
+Can run on standard consumer hardware (laptop, Raspberry Pi)
+Earn smaller LOS rewards than full nodes
+Lower barrier to entry — critical for global distribution
+
+There are no geographic or regional node types. A node that holds only a subset of the chain cannot independently verify the full record — it must trust someone else's view of the data it doesn't have. That trust is an attack surface. In regions where corruption is most likely, local control of a regional node is exactly the threat Landos is designed to eliminate.
 
 ### 6.3 How Nodes Earn LOS
-
 Node operators earn LOS through two mechanisms:
-
-**Uptime and availability** — nodes that remain online and serve the network reliably earn LOS proportional to their availability. This incentivizes a stable, always-on network backbone.
-
-**Validation work** — nodes that participate in confirming land claims, processing registrations, and executing validation tasks earn additional LOS for that work.
-
+Uptime and availability — nodes that remain online and serve the network reliably earn LOS proportional to their availability. This incentivizes a stable, always-on network backbone.
+Validation work — nodes that participate in confirming land claims, processing registrations, and executing validation tasks earn additional LOS for that work.
 The specific reward amounts, the ratio between uptime rewards and validation rewards, and the schedule for both are TBD. The design principle is that running a node should always be economically rational once LOS has meaningful value, creating a self-reinforcing network effect.
 
 ### 6.4 Making Nodes Easy to Run
-
 Previous blockchain projects — including Bitcoin in its early years — suffered from node operation being too technically demanding for ordinary people. Landos must make node operation accessible. This means:
 
-- Simple installation with minimal technical knowledge required
-- Clear documentation and tooling
-- Light and geographic node options for lower-powered hardware
-- A path from zero to running a node that any technically curious person can follow
+Simple installation with minimal technical knowledge required
+Clear documentation and tooling
+Light node option for lower-powered hardware
+A path from zero to running a node that any technically curious person can follow
 
 The easier it is to run a node, the more nodes exist. The more nodes exist, the more secure and decentralized the network. This is a design and UX priority, not just an engineering consideration.
+The chain will grow large over time as land records accumulate. This is a scaling and hardware problem — to be addressed through state pruning, compression, and the long-term decline in storage costs — not through data fragmentation or geographic sharding.
+
+
+
 
 ---
 
