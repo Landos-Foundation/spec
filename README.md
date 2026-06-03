@@ -1,2 +1,2 @@
 # spec
-Fundos protocol specification — CC0 public domain
+Landos protocol specification — CC0 public domain
