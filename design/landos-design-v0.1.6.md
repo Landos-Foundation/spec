@@ -837,6 +837,64 @@ The genesis block declares and initializes the following:
 
 ## 19. Security and Decentralization
 
+### 19.0 Node Data Privacy
+
+All nodes are public — anyone can run one, no permission required. This is a core security property. But it means every full node holds the complete chain, and everything on the chain is visible to anyone who runs a node. The privacy layer must be designed so that nodes cannot reconstruct a landowner's real identity or location from what they hold.
+
+**Parcel Record location privacy — hashing with user-derived salt**
+
+Parcel Records store a **hash of the Coords URI** rather than the URI itself. A node sees an opaque identifier, not a readable location.
+
+To prevent rainbow table attacks (pre-computing hashes for every location on Earth and matching them against on-chain data), the hash is salted. The salt is **derived mathematically from the user's own private key** — not stored separately, not held by the Foundation, not controlled by any third party. The user already holds the key to everything on the protocol. The location salt is no different.
+
+This means:
+- No node can read a parcel's location from the chain
+- No adversary can reverse the hash without the user's private key
+- No single person — including the creator or the Foundation — can reconstruct any landowner's location
+- If the user has their private key, they have their salt. No new failure point.
+
+This is a meaningful layer of defense. It is not a complete privacy guarantee — the full solution requires the ZK location proof layer (deferred). Together, hashing with user-derived salt and ZK proofs eliminate the location exposure at the public chain level entirely.
+
+**DID role separation**
+
+A DID is pseudonymous, not anonymous. Every action tied to a DID accumulates into a profile. Connect a DID to a real person once and their entire on-chain history is exposed.
+
+To limit this, Landos uses **one DID per role, not one DID per person:**
+
+- **Landowner DID** — used only for land claims, ownership, and transfers
+- **Validator DID** — used for attestations, quorum signatures, and Land Witness certifications
+- **Governance DID** — used for voting in the Token Holder Assembly and hub governance
+
+Separating roles means an adversary watching the validator attestation graph cannot automatically connect it to a person's land ownership record. The profiles don't overlap. Each role presents a distinct on-chain identity.
+
+This is implementable now, without the ZK layer, and is fully compatible with ZK-based enhancements later.
+
+**DID rotation** — generating a new DID periodically and linking old to new via ZK proof of continuity — is a stronger long-term defense and is noted here for future design. It requires the ZK layer and is deferred.
+
+**Social graph privacy**
+
+The social graph — who knows who — is never written to the public chain. It is off-chain only, used to bootstrap onboarding but never stored where nodes can see it. A node cannot reconstruct community relationships from the chain.
+
+The challenge: the protocol still needs to use the social graph. The neighbor quorum requires neighbors to attest. If the graph is private, how does the chain know a valid quorum was met without seeing which DIDs signed?
+
+**Private attestations:** Instead of recording "DID-A signed for DID-B" on-chain, the chain records only a proof that a valid quorum was met — a single cryptographic statement that the required number of qualifying neighbors attested and diversity rules were satisfied, without naming any of them. What goes on-chain: the proof. What stays off-chain: the identities of the attestors.
+
+**Interim approach (pre-ZK):** Attestations are recorded against validator DIDs only (role separation). Watching the attestation graph does not directly expose land ownership. Meaningfully better than a fully public social graph — not a complete solution.
+
+**Full solution (requires ZK layer):** Private attestations via ZK proofs, where the chain sees only a proof of valid quorum with no DIDs visible at all. The social graph becomes completely invisible to nodes. This is a priority item for the ZK design session.
+
+**Habitation check-in privacy**
+
+Individual check-ins logged against a DID and location over time are a surveillance record — frequency, timing, and pattern of presence. Even with location hashing, a pattern of check-ins against the same hash day after day reveals daily life.
+
+Three compounding risks: (1) frequency — regular check-ins required for habitation create a rich record; (2) correlation — if a DID is ever linked to a real person, their entire check-in history is exposed; (3) liveness challenges — designed to prove physical presence, which is exactly what makes them a privacy risk.
+
+**Aggregate, don't log:** Individual check-ins are never recorded on-chain. The protocol records only a running habitation score — a single number that updates periodically. The chain sees "this DID's habitation score is X," not a timestamped log of individual check-ins. Check-ins are verified off-chain by the app and submitted as a score update only.
+
+**Randomized submission windows:** Score updates are submitted within a random window, not on a predictable schedule. This prevents timing analysis from revealing when someone is or isn't present.
+
+**Full solution (requires ZK layer):** The habitation score update is a ZK proof — "this DID's score increased by X, verified against valid check-in data" — with no check-in details touching the chain at all. Priority item for the ZK design session.
+
 Landos is designed to have no off switch.
 
 - **No central server** — nodes run across many jurisdictions globally
@@ -1009,5 +1067,5 @@ Landos stands on the shoulders of existing work — the same way Bitcoin assembl
 | v0.1.3 | 2026-05-18 | Token ticker LOS confirmed; ownership status system; transfers and succession; Community Hubs; Tendermint BFT confirmed |
 | v0.1.4 | 2026-05-29 | Token model redesigned: two instruments (Land Record NFT + LOS fungible token); De Soto dead capital framework added as philosophical pillar; node economics section added (tiered nodes, LOS rewards); prior art / failed projects analysis added; government relationship clarified (legitimacy earned through adoption, not permission); open questions updated |
 | v0.1.5 | 2026-05-30 | Landos Foundation added (Section 5): minimal operational entity, support operations, LOS worker compensation, no protocol control; key recovery system added (Section 16): tiered recovery paths, recovery portal, 3 recovery contacts at registration, 72-hour time-lock, AI-assisted automation, LOS-rewarded human escalation; node model finalized: relay nodes added, geographic nodes removed; sections renumbered throughout; What Landos Is Not updated to reflect Foundation and 4.3 framing |
-| v0.1.6 | 2026-06-05 | Dispute Bond finalized (Section 12.5): bond in escrow, scales with PVS + confirmation depth, Hub subsidy covers legitimate claimants. Hub activation threshold (Section 15.1): adaptive by density, exact values TBD at testnet. Proof of Habitation anti-gaming (Section 11.1): liveness challenges, cross-signal anomaly detection, community corroboration. AR Boundary Walking anti-gaming (Section 11.3): sensor fusion, video liveness, temporal cross-check, community spot-check. Node reward principles locked (Section 7.3): fixed hierarchy, validation > uptime, Bitcoin halving curve, written into genesis. Foundation jurisdiction: no incorporation before genesis. Fractional ownership (Section 6.3): NFT stays whole, co-owners in metadata, M-of-N signatures required. Key recovery penalties (Section 17.7): scaled by information advantage, support workers held to higher standard. Worst-case key recovery: no last-resort path in v1, deferred to v2. Proof of Land scoring model added (Section 10.4): habitation = time-weighted accumulation with decay floor; hub standing = contribution-weighted, outcome-adjusted, velocity-flagged; attestations = PVS-weighted, diversity-required, no decay; confirmation requires all three floors met plus combined threshold — exact values TBD at testnet |
+| v0.1.6 | 2026-06-05 | Dispute Bond finalized (Section 12.5): bond in escrow, scales with PVS + confirmation depth, Hub subsidy covers legitimate claimants. Hub activation threshold (Section 15.1): adaptive by density, exact values TBD at testnet. Proof of Habitation anti-gaming (Section 11.1): liveness challenges, cross-signal anomaly detection, community corroboration. AR Boundary Walking anti-gaming (Section 11.3): sensor fusion, video liveness, temporal cross-check, community spot-check. Node reward principles locked (Section 7.3): fixed hierarchy, validation > uptime, Bitcoin halving curve, written into genesis. Foundation jurisdiction: no incorporation before genesis. Fractional ownership (Section 6.3): NFT stays whole, co-owners in metadata, M-of-N signatures required. Key recovery penalties (Section 17.7): scaled by information advantage, support workers held to higher standard. Worst-case key recovery: no last-resort path in v1, deferred to v2. Proof of Land scoring model added (Section 10.4): habitation = time-weighted accumulation with decay floor; hub standing = contribution-weighted, outcome-adjusted, velocity-flagged; attestations = PVS-weighted, diversity-required, no decay; confirmation requires all three floors met plus combined threshold. Neighbor Quorum: 2-of-3 universal, diversity rule enforced. Hub boundary definition (Section 15.2): organic clustering, no political boundaries. Three pillars added (Section 2): People First, de Soto, Bitcoin. Onboarding philosophy added (Section 20). Node data privacy added (Section 19.0): location hashed with user-derived salt; DID role separation; social graph never on-chain; habitation aggregate score only with randomized submission; all full ZK solutions deferred |
 | v0.1.5 | 2026-06-01 | Asset model clarified: Parcel Record introduced as foundational protocol primitive (Section 6.2); token model updated from two instruments to three layers (Parcel Record → Land Record NFT → LOS); parcel lifecycle defined (subdivision, consolidation, boundary adjustment, contested boundary); section 6 renumbered throughout. Griefing defense added (Section 12): Land Witness, Interested Party Exclusion, Personal Validation Score (PVS), Hold Period, Dispute Bond; all sections renumbered. Staged entry model added (Section 13.1): four stages × 7 days minimum = 28 days to Confirmed; confirmation depth introduced (Section 13.2) |
